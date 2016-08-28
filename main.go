@@ -5,16 +5,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 
 	"github.com/ghodss/yaml"
 )
 
 func main() {
 	var output = flag.String("o", "", "output format (j=json, y=yaml)")
-	var input = flag.String("file", "", "input file")
 	flag.Parse()
 
-	data, err := ioutil.ReadFile(*input)
+	data, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
 		log.Fatalf("err: %v\n", err)
 	}
