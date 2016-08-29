@@ -25,12 +25,12 @@ func main() {
 		if err != nil {
 			log.Fatalf("err: %v\n", err)
 		}
-		fmt.Println(string(y))
+		fmt.Print(string(y))
 	} else {
 		j2, err := yaml.YAMLToJSON(data)
 		if err != nil {
 			log.Fatalf("err: %v\n", err)
 		}
-		fmt.Println(string(j2))
+		fmt.Print(string(j2))
 	}
 }
