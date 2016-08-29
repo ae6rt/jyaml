@@ -1,7 +1,7 @@
 package main
 
 import (
-	"flag"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -11,29 +11,26 @@ import (
 )
 
 func main() {
-	var output = flag.String("o", "", "output format (j=json, y=yaml)")
-	flag.Parse()
-
 	data, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
 		log.Fatalf("err: %v\n", err)
 	}
 
-	switch *output {
-	case "j":
-		j2, err := yaml.YAMLToJSON(data)
-		if err != nil {
-			log.Fatalf("err: %v\n", err)
-		}
-		fmt.Println(string(j2))
-	case "y":
+	// try to guess the output format based on the input data
+	var d interface{}
+	err = json.Unmarshal(data, &d)
+	isJson := err == nil
+	if isJson {
 		y, err := yaml.JSONToYAML(data)
 		if err != nil {
 			log.Fatalf("err: %v\n", err)
 		}
 		fmt.Println(string(y))
-	default:
-		log.Fatalf("Unsupported output format %s\n", *output)
+	} else {
+		j2, err := yaml.YAMLToJSON(data)
+		if err != nil {
+			log.Fatalf("err: %v\n", err)
+		}
+		fmt.Println(string(j2))
 	}
-
 }
