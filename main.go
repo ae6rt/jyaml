@@ -20,6 +20,7 @@ func main() {
 	var d interface{}
 	err = json.Unmarshal(data, &d)
 	isJson := err == nil
+
 	if isJson {
 		y, err := yaml.JSONToYAML(data)
 		if err != nil {
