@@ -8,6 +8,7 @@ Read os.Stdin and convert to or from JSON / YAML.  jyaml autosenses the input to
 
 ```
 go get github.com/ghodss/yaml
+go build
 ```
 
 ### Usage
