@@ -1,4 +1,3 @@
-
 ## jyaml - a tool for converting YAML to JSON and vice versa
 
 Read standard input and convert to or from JSON / YAML.  jyaml autosenses the input to produce the complementary output.
