@@ -17,9 +17,7 @@ func main() {
 	}
 
 	// try to guess the output format based on the input data
-	var d interface{}
-	err = json.Unmarshal(data, &d)
-	isJson := err == nil
+	isJson := json.Unmarshal(data, new(interface{})) == nil
 
 	if isJson {
 		y, err := yaml.JSONToYAML(data)
