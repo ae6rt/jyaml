@@ -17,20 +17,20 @@ func main() {
 		log.Fatalf("err: %v\n", err)
 	}
 
+	var result []byte
+
 	// try to guess the output format based on the input data
 	isJson := json.Unmarshal(data, new(interface{})) == nil
 
-	var f func([]byte) ([]byte, error)
-
 	if isJson {
-		f = yaml.JSONToYAML
+		result, err = yaml.JSONToYAML(data)
 	} else {
-		f = yaml.YAMLToJSON
+		result, err = yaml.YAMLToJSON(data)
 	}
 
-	if result, err := f(data); err != nil {
+	if err != nil {
 		log.Fatalf("err: %v\n", err)
-	} else {
-		fmt.Print(string(result))
 	}
+
+	fmt.Print(string(result))
 }
